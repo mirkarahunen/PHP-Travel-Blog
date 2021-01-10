@@ -1,0 +1,983 @@
+/**
+Project Name: Living Travel Life blog
+Author: Mirka Rahunen
+Description: PHP WBD 5100.1
+Abgabe: 07.09.2020
+*/
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+1.0 General
+  1.1 Back to top button
+2.0 Header
+  2.1 Header image
+  2.2 Header scroll-down button
+3.0 Navigation
+  3.1 Dropdown menu content
+  3.2 Active link
+  3.3 Anchor navigation
+  3.4 Padding for anchor links
+  3.5 Navigation and footer icons
+  3.6 Nav hover
+  3.7 Mobile nav
+  3.8 Mobile dropdown navigation
+  3.9 Sticky nav
+4.0 Content
+5.0 Destinations content
+6.0 Newsletter content
+  6.1 Newsletter inputs and button
+7.0 This is me content
+8.0 Upcoming travels content
+  8.1 Slideshow caption
+  8.2 Slideshow controls
+  8.3 Slideshow dots
+9.0 Content for other pages
+10.0 Gallery page content
+  10.1 Gallery modal window
+  10.2 Gallery page controls
+  10.3 Gallery comments section
+11.0 Register page content
+12.0 Sign in page content
+13.0 Dashboard content
+14.0 Users content
+15.0 Upload content
+16.0 Footer content
+
+
+/*-------------------- 1.0 GENERAL --------------------*/
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+h1, h2, h3, h4, ul {
+  font-family: 'Amatic SC';
+}
+
+p {
+  font-family: 'Roboto';
+  font-size: 12pt;
+  line-height: 1.5rem;
+}
+
+h1 {
+  font-size: 40pt;
+}
+
+h2 {
+  font-size: 36pt;
+  text-align: center;
+}
+
+h3 {
+  font-size: 30pt;
+  text-align: center;
+}
+
+h4 {
+  font-size: 26pt;
+}
+
+label {
+  font-family: 'Roboto';
+  font-size: 12pt;
+}
+
+button[type="button"] {
+  font-family: 'Roboto';
+  font-size: 12pt;
+  border-radius: 5px;
+}
+
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.destination-posts, .destinations, .about-author, .travels-slideshow, .newsletter,
+.gallery-headline, .gallery-images, .register-info, .sign-in-headline, .dashboard-headline,
+.edit-container, .users-container, .edit-headline, .users-headline, .upload-headline, .footer-content {
+  margin-top: 50px;
+}
+
+.about-author-text p {
+  margin-top: 30px;
+}
+
+.destination-1:hover, .destination-2:hover, .destination-3:hover, .upcoming-travels-images:hover,
+.read-btn:hover, .newsletter-box:hover, .gallery-images img:hover,
+.form-group input:hover, .content-posts:hover {
+  box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+}
+
+/*-------------------------------------------------------*/
+/*1.1 Back to top button */
+#back-to-top-btn {
+  display: none;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  width: 70px;
+  height: 70px;
+  font-size: 30pt;
+  border: 3px solid black;
+  border-radius: 50px;
+  z-index: 4;
+  animation: jumpingButton 2s ease 1s infinite;
+}
+
+#back-to-top-btn:hover {
+  background-color: black;
+  color: white;
+  width: 80px;
+  height: 80px;
+  transition: 0.5s ease;
+}
+
+#back-to-top-btn.active {
+  display: block;
+}
+
+@keyframes jumpingButton {
+  0% {
+    transform: scale(1.1, .9);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}
+
+/*-------------------- 2.0 HEADER --------------------*/
+
+.header-logo, .header-logo-back {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.header-logo img {
+  width: 130px;
+}
+
+.logo-text {
+  font-family: 'Dancing Script', cursive;
+  color: white;
+  font-size: 26pt;
+  margin-left: 10px;
+}
+
+/*-------------------------------------------------------*/
+/*2.1 Header image */
+.header-image img {
+  max-width: 100%;
+  position: relative;
+}
+
+/*-------------------------------------------------------*/
+/*2.2 Header scroll-down button */
+.scroll-down {
+  display: none;
+}
+
+.scroll-down >.fa-arrow-down {
+  border: 3px solid white;
+  color: white;
+  font-size: 30pt;
+  border-radius: 50%;
+  padding: 5px;
+  animation: jumpingButton 2s ease 1s infinite;
+  position: absolute;
+  bottom: 10px;
+}
+
+/*-------------------- 3.0 NAVIGATION --------------------*/
+.navigation-content, .main-navigation.sticky {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+}
+
+.navigation-content-back {
+  width: 100%;
+  background-color: #1AA6B7;
+}
+
+
+.main-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.navigation>ul, .sign-in ul, .navigation-icons ul, .footer-icons ul  {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+.sign-in ul {
+  margin-top: 24px;
+}
+
+.navigation>ul li, .sign-in>ul li {
+  list-style: none;
+  margin-right: 30px;
+  font-size: 22pt;
+  position: relative;
+}
+
+
+/*-------------------------------------------------------*/
+/*3.1 Dropdown menu content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 300px;
+  height: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+}
+
+.dropdown-content>ul>li {
+  display: block;
+  margin: 30px 5px;
+}
+
+.dropdown.active .dropdown-content {
+  display: block;
+}
+
+.fa-caret-down {
+  margin-left: 5px;
+}
+
+/*-------------------------------------------------------*/
+/*3.2 Active link */
+.navigation ul li.active {
+  border-top: 2px solid #DD1A36;
+  border-bottom: 2px solid #DD1A36;
+  padding: 2px;
+}
+
+/*-------------------------------------------------------*/
+/*3.3 Anchor navigation */
+.anchor-navigation>ul {
+  display: flex;
+  font-size: 18pt;
+  margin-bottom: 10px;
+}
+
+.anchor-navigation>ul>li {
+  margin: 10px 10px 0 10px;
+}
+
+.anchor-navigation>ul>li:hover {
+  opacity: 0.7;
+}
+
+.anchor-navigation>ul>li.active {
+  border-bottom: 2px solid #DD1A36;
+}
+
+/*-------------------------------------------------------*/
+/* 3.4 Padding for anchor links*/
+#destinations-anchor::before, #newsletter-anchor::before, #about-author-anchor::before, #slideshow-anchor::before {
+  display: block;
+  content: " ";
+  margin-top: -140px;
+  height: 140px;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/*-------------------------------------------------------*/
+/*3.4 Navigation and footer icons */
+
+
+.sign-in ul li {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.footer-icons ul li img {
+  max-width: 50px;
+}
+
+/*-------------------------------------------------------*/
+/*3.5 Nav hover */
+.nav::before, .dropdown-content>ul>li::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #DD1A36;
+  overflow: hidden;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s;
+}
+
+.nav:hover::before, .dropdown-content>ul>li:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav::after, .dropdown-content>ul>li::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #DD1A36;
+  overflow: hidden;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s;
+}
+
+.nav:hover::after, .dropdown-content>ul>li:hover::after {
+  transform: scaleX(1);
+  transform-origin: right;
+}
+
+/*-------------------------------------------------------*/
+/*3.6 mobile nav*/
+@keyframes mobileNavOpen {
+  0% {
+    transform: scaleY(0.0);
+  }
+
+  100% {
+    transform: scaleY(1.0);
+  }
+}
+
+.click {
+  display: inline-block;
+  visibility: hidden;
+  background: #000;
+  color: #fff;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 70px;
+  height: 70px;
+  border-radius: 5px;
+  border-color: #fff;
+}
+
+.fa-bars {
+  color: white;
+  font-size: 35pt;
+}
+
+.navigation.mobile, .navigation.mobile.back {
+  display: none;
+}
+
+.navigation.mobile.active {
+  display: block;
+  margin: 0 auto;
+  animation: mobileNavOpen 0.6s ease forwards;
+}
+
+.navigation.mobile.back.active {
+  display: block;
+  margin-top: 100px;
+  animation: mobileNavOpen 0.6s ease forwards;
+}
+
+.navigation.mobile ul {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.navigation.mobile ul li{
+  margin: 0;
+  font-size: 3rem;
+}
+
+.back {
+  color: white;
+}
+
+/*-------------------------------------------------------*/
+/*3.7 Mobile dropdown navigation*/
+.dropdown-content-mobile {
+  display: none;
+}
+
+.dropdown-content-mobile.active {
+  display: block;
+  margin-left: 50px;
+}
+
+.dropdown-content-mobile>ul>li {
+  background-color: #1AA6B7;
+  padding: 10px;
+}
+
+.dropdown-content-mobile>ul>li:hover {
+  opacity: 0.8;
+}
+
+/*-------------------------------------------------------*/
+/*3.9 Sticky nav*/
+.sticky {
+  position: fixed;
+  top: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  z-index: 1;
+}
+
+.sticky+.main-content {
+  padding-top: 90px;
+}
+
+/*-------------------- 4.0 CONTENT --------------------*/
+/*-------------------- 5.0 DESTINATIONS CONTENT --------------------*/
+.destination-posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.destination-1, .destination-2, .destination-3 {
+  max-width: 315px;
+  height: 510px;
+  background-color: #DAECF3;
+  margin-left: 30px;
+  margin-right: 30px;
+  position: relative;
+}
+
+.destination-text, .destination-headline {
+  padding: 15px;
+}
+
+.destination-headline {
+  text-align: left;
+}
+
+.read-btn {
+  width: 200px;
+  padding: 20px;
+  position: absolute;
+  border: none;
+  background: #1AA6B7;
+  margin-left: 60px;
+}
+
+.read-btn:hover {
+  font-weight: 600;
+  letter-spacing: 3px;
+  background-color: #DD1A36;
+  color: black;
+  transition: all 0.5s ease 0s;
+}
+
+/*-------------------- 7.0 THIS IS ME CONTENT --------------------*/
+.about-author-text {
+  text-align: center;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+/*-------------------- 8.0 UPCOMING TRAVELS CONTENT --------------------*/
+.travels-slideshow, .upcoming-travels-images {
+  position: relative;
+}
+
+.upcoming-travels-images {
+  display: flex;
+}
+
+.travels-slideshow h2 {
+  margin-bottom: 30px;
+}
+
+.upcoming-travels-images .image {
+  display: none;
+}
+
+.upcoming-travels-images .image.active {
+  display: block;
+}
+
+.upcoming-travels-images img {
+  max-width: 100%;
+}
+
+/*-------------------------------------------------------*/
+/*8.1 Slideshow caption*/
+.travels-slideshow-caption {
+  position: absolute;
+  width: 100%;
+  bottom: 65%;
+  padding: 10px;
+}
+
+/*-------------------------------------------------------*/
+/*8.2 Slideshow controls*/
+.slide-left {
+  left: -10px;
+}
+
+.slide-right {
+  right: -10px;
+}
+
+.slide-left, .slide-right {
+  position: absolute;
+  top: 45%;
+  border: none;
+  border-radius: 3px;
+  width: 50px;
+  height: 100px;
+  background-color: #DD1A36;
+}
+
+.slide-left:hover, .slide-right:hover {
+  animation: dancing-buttons 1s linear infinite;
+}
+
+.fa-angle-right, .fa-angle-left {
+  margin-top: 10px;
+  font-size: 30pt;
+}
+
+@keyframes dancing-buttons {
+  0%, 100% {
+    transform: rotate(0);
+    transform: scaleX(1);
+  }
+
+  25% {
+    transform: rotate(-4deg);
+  }
+
+  75% {
+    transform: rotate(4deg);
+  }
+}
+
+/*-------------------------------------------------------*/
+/*8.3 Slideshow dots*/
+.dot-container {
+  text-align: center;
+}
+
+.fa-circle {
+  padding: 10px;
+  font-size: 20pt;
+}
+
+.fa-circle:hover {
+  opacity: 0.5;
+}
+
+.fa-circle.active {
+  color: #DD1A36;
+}
+
+/*-------------------- 9.0 CONTENTS FOR OTHER PAGES --------------------*/
+/*-------------------- 10.0 GALLERY PAGE CONTENT --------------------*/
+.gallery-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.images {
+  max-width: 350px;
+  margin: 15px;
+}
+
+.images img {
+  box-shadow: 1px 1px 10px 2px #DAECF3;
+  width: 350px;
+  height: 233px;
+}
+
+.images p {
+  text-align: center;
+}
+
+
+.gallery-images img:hover {
+  opacity: 0.8;
+  border-radius: 3px;
+}
+
+/*-------------------------------------------------------*/
+/*10.1 Gallery modal window*/
+.modal-content-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  padding: 0.30rem;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal.show {
+  display: block;
+  z-index: 2;
+}
+
+.modal-dialog {
+  height: 400px;
+  margin: 50px 0 0 0;
+}
+
+.modal img {
+  display: flex;
+  margin-top: 50px;
+  max-width: 710px;
+  max-height: 400px;
+  position: relative;
+}
+
+.modal-image {
+  position: relative;
+}
+
+.modal .data-caption {
+  display: block;
+  background-color: rgba(255, 255, 255, 0.5);
+  max-width: 1200px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.modal .data-caption, .image-info {
+  font-size: 28pt;
+  font-family: 'Roboto';
+}
+
+.image-info {
+  width: 200px;
+  color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  top: 15px;
+  left: 16%;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0)
+  }
+
+  to {
+    transform: scale(1)
+  }
+}
+
+.modal-content, .data-caption, .modal img, .next-button, .prev-button {
+  animation-name: zoom;
+  animation-duration: 0.5s;
+}
+
+/*-------------------------------------------------------*/
+/*10.2 Gallery page controls*/
+
+.modal-controls {
+  position: relative;
+}
+
+.next-button, .prev-button {
+  width: 50px;
+  height: 80px;
+  border: none;
+  position: absolute;
+  overflow: hidden;
+  border-radius: 5px;
+  color: #bbb;
+}
+
+.next-button {
+  left: -50px;
+}
+
+.prev-button {
+  right: 660px;
+}
+
+#closeButton {
+  font-size: 18pt;
+  position: absolute;
+  right: 10px;
+  color: #bbb;
+  transition: 0.3s;
+}
+
+#closeButton:hover, #prev-button:hover, #next-button:hover {
+  border-radius: 5px;
+  background-color: #292929;
+}
+
+#closeButton.show {
+  visibility: visible;
+}
+
+/*-------------------------------------------------------*/
+/*10.3 Gallery comments section */
+
+.user-comments {
+  text-align: center;
+}
+
+.user {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.time {
+  color: grey;
+  margin-left: 20px;
+}
+
+.comment-post {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comment {
+  margin-left: 10px;
+
+}
+
+
+/*-------------------- 11.0 REGISTER PAGE CONTENT --------------------*/
+.register-container, .sign-in-container {
+  padding: 20px;
+}
+
+.btn-submit, .checkbox {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-sign-in {
+  max-width: 40%;
+  margin: 10px auto;
+}
+
+.form label {
+  margin: 10px auto;
+}
+
+input[type="text"], input[type="password"], input[type="email"], select {
+  font-size: 12pt;
+}
+
+input::placeholder {
+  color: #292929;
+  padding-left: 10px;
+}
+
+.form-group input {
+  padding: 20px;
+}
+
+.checkbox {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+input[type="submit"] {
+  background-color: #1AA6B7;
+  width: 70px;
+  height: 40px;
+  font-size: 12pt;
+  border: 0;
+  border-radius: 10px;
+  font-family: 'Roboto';
+}
+
+.btn-submit {
+  text-align: center;
+}
+
+.btn-submit input:hover {
+  font-size: 14pt;
+  opacity: 0.9;
+  transition: 0.5s ease;
+}
+
+.form-text {
+  color: #DD1A36;
+  text-align: center;
+  display: block;
+  font-size: 14pt;
+}
+
+.form-text-success {
+  color: green;
+  text-align: center;
+  display: block;
+  font-size: 14pt;
+}
+
+.home {
+  padding-top: 20px;
+}
+
+/*-------------------- 12.0 SIGN-IN PAGE CONTENT --------------------*/
+.sign-in-headline h3 {
+  margin-top: 10px;
+}
+
+/*-------------------- 13.0 DASHBOARD CONTENT --------------------*/
+.dashboard-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  margin: 10px;
+  max-width: 20rem;
+}
+
+.number {
+  margin-top: 20px;
+}
+
+.card-header {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18pt;
+}
+
+.card h5 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16pt;
+}
+
+.dashboard-content, .users-content, .edit-content {
+  background-color: white;
+  margin: 20px;
+}
+
+.content-posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px;
+  border: 3px solid black;
+  border-radius: 5px;
+  padding: 30px;
+}
+
+.content-posts .fas {
+  font-size: 30pt;
+  margin: 0 20px 20px 20px;
+}
+
+/*-------------------- 14.0 USERS CONTENT --------------------*/
+table, form {
+  margin: 0 auto;
+}
+
+thead {
+  border: 1px solid #ccc;
+  background-color: #DAECF3;
+  vertical-align: middle;
+}
+
+th, td {
+  font-family: 'Roboto';
+  font-size: 14pt;
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+td {
+  font-size: 11pt;
+}
+
+/*-------------------- 15.0 UPLOAD CONTENT --------------------*/
+#text {
+  font-family: 'Roboto';
+  font-size: 12pt;
+}
+
+.upload li {
+  font-size: 18pt;
+}
+
+/*-------------------- 16.0 POSTS CONTENT --------------------*/
+
+td>img {
+  max-width: 80px;
+}
+
+/*-------------------- .0 FOOTER --------------------*/
+.footer-content {
+  background-color: #1AA6B7;
+  padding: 30px 0 20px 20px;
+}
+
+.footer-content ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer-content ul li {
+  margin-right: 30px;
+  margin-top: 20px;
+  font-family: 'Roboto';
+  font-size: 12pt;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.footer-nav a {
+  color: white;
+}
+
+/* -------------------------------------------------------------------------- */
